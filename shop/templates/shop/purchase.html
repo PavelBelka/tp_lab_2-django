@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои покупки</title>
+</head>
+<body>
+    <div>
+        <h2>Мои покупки</h2>
+        <table>
+            <tr>
+                <td><p>Номер</p></td>
+                <td><p>Адрес</p></td>
+                <td><p>Дата</p></td>
+                <td><p>Товар</p></td>
+                <td><p>Цена</p></td>
+            </tr>
+            {% for p in purchase %}
+                <tr>
+                    <td><p>{{ p.id }}</p></td>
+                    <td><p>{{ p.address }}</p></td>
+                    <td><p>{{ p.date }}</p></td>
+                    <td><p>{{ p.product.name }}</p></td>
+                    <td><p>{{ p.product.price }}</p></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href = "{% url 'index' %}">Назад</a>
+    </div>
+</body>
+</html>

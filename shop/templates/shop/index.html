@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" charset="UTF-8" />
+    <title>Товары</title>
+</head>
+<body>
+    {% block content %}
+        <h2>Сайт магазина</h2>
+        <p>Добро пожаловать в магазин, {% if user.is_authenticated %}{{user.username}}{% else %}авторизуйтесь{% endif %}</p>
+        {% if user.is_authenticated %}
+            <a href = "{% url 'mypurchase' %}">Мои покупки</a> /
+            <a href = "{% url 'logout' %}">Выйти</a>
+        {% else %}
+            <a href = "{% url 'login' %}">Авторизация</a> /
+            <a href = "{% url 'register' %}">Регистрация</a>
+        {% endif %}
+    {% endblock %}
+    <div>
+        <h3>Список</h3>
+        <table>
+            <tr>
+                <td><p>Наименование</p></td>
+                <td><p>Цена</p></td>
+                <td></td>
+            </tr>
+            {% for p in products %}
+                <tr>
+                    <td><p>{{ p.name }}</p></td>
+                    <td><p>{{ p.price }}</p></td>
+                    {% if user.is_authenticated %}
+                        <td><p><a href="/buy/{{ p.id }}">Купить</a></p></td>
+                    {% else %}
+                        <td><p>Покупка недоступна</p></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
